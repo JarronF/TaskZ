@@ -32,9 +32,10 @@ namespace TaskZ.Pages
             HighLevelTaskList = await _taskItemService.GetHighLevelTasks();      
         }
 
-        public async Task OnGetSubTasksAsync(int taskId)
+        public async Task<PartialViewResult> OnGetSubTasksPartialAsync(int taskId)
         {
             SubTaskList = await _taskItemService.GetSubTasks(taskId);
+            return Partial("_TaskListPartial", SubTaskList);
         }
     }
 }

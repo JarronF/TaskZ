@@ -6,53 +6,21 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
 <div>
     <h3>Task Board</h3>
-
-    @foreach (TaskZ.Models.TaskItem tsk in Model.HighLevelTaskList)
-    {
-        <ul>
-            <li id="tsk" data-taskid="@tsk.Id">
-                @tsk.Title
-                <button class="btn btn-primary" id="load">Sub tasks</button>
-
-                <div id="subTasks"></div>
-                @*@if (tsk.Children.Any())
-                    {
-                        <ul>
-                            @foreach (TaskZ.Models.TaskItem tskChild in tsk.Children)
-                            {
-                                <li>
-                                    @tskChild.Title
-                                </li>
-                            }
-                        </ul>
-                    }*@
-            </li>
-        </ul>
-    }
+    <h5 class="alert alert-info">Using partial views:</h5>
+    <p>Goal: Use an un-ordered list to display tasks using the _TaskListPartial view. </p>
+    <p>Clicking the main task line will call a named handler method using AJAX and return the partial view to display the sub-tasks</p>
+    <partial name="_TaskListPartial" model="Model.HighLevelTaskList" />
 </div>
 @section scripts{
     <script>
         $(function () {
-            $('#load').on('click', function () {
-                var taskId = $('#tsk').data('taskid');
-                $.ajax({
-                    url: "/Index/SubTasks/" + taskId,
-                    method: "GET",
-                    //data: { parentId: taskId },
-                    success: function (data) {
-                        //For each item retrieved in the AJAX call...
-                        //$.each(data, function (index, itemData) {
-                        //    //...append that item to the countriesList
-                        //    $("#countriesList").append("<option value='" + itemData + "'>" + itemData + "</option>");
-                        //});
-                        var x = data;
-                    }
-                });
+            $('.task-line').on('click', function () {
+                var taskId = $(this).data('taskid');
+                $(this).find("#subTasks").load("/Index/SubTasksPartial/" + taskId);
             });
         });
     </script>

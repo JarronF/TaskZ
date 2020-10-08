@@ -1,0 +1,15 @@
+﻿@using TaskZ.Models;
+
+@model List<TaskItem>
+
+<ul>
+    @foreach (TaskZ.Models.TaskItem task in Model)
+    {
+    <li class="task-line alert alert-primary" data-taskid="@task.Id">        
+        @task.Title
+        <div id="subTasks"></div>
+    </li>
+    }
+</ul>
+
+
