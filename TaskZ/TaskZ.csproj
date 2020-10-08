@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200911114541_TaskItem_TaskComment.cs" />
+    <Compile Remove="Migrations\20200911114541_TaskItem_TaskComment.Designer.cs" />
+    <Compile Remove="Migrations\20200911114842_TaskItem_TaskComment.cs" />
+    <Compile Remove="Migrations\20200911114842_TaskItem_TaskComment.Designer.cs" />
+    <Compile Remove="Migrations\20200911115424_TaskItem.cs" />
+    <Compile Remove="Migrations\20200911115424_TaskItem.Designer.cs" />
+    <Compile Remove="Migrations\20200911130352_ApplicationUserIDChanges.cs" />
+    <Compile Remove="Migrations\20200911130352_ApplicationUserIDChanges.Designer.cs" />
+    <Compile Remove="Migrations\20200911135644_AddTaskComment.cs" />
+    <Compile Remove="Migrations\20200911135644_AddTaskComment.Designer.cs" />
+    <Compile Remove="Migrations\20200911140143_AddTaskComment.cs" />
+    <Compile Remove="Migrations\20200911140143_AddTaskComment.Designer.cs" />
+    <Compile Remove="Migrations\20200916135932_updateTaskItem.cs" />
+    <Compile Remove="Migrations\20200916135932_updateTaskItem.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+</Project>

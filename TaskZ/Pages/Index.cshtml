@@ -1,0 +1,59 @@
+﻿@page "{handler?}/{taskId:int?}"
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    <h3>Task Board</h3>
+
+    @foreach (TaskZ.Models.TaskItem tsk in Model.HighLevelTaskList)
+    {
+        <ul>
+            <li id="tsk" data-taskid="@tsk.Id">
+                @tsk.Title
+                <button class="btn btn-primary" id="load">Sub tasks</button>
+
+                <div id="subTasks"></div>
+                @*@if (tsk.Children.Any())
+                    {
+                        <ul>
+                            @foreach (TaskZ.Models.TaskItem tskChild in tsk.Children)
+                            {
+                                <li>
+                                    @tskChild.Title
+                                </li>
+                            }
+                        </ul>
+                    }*@
+            </li>
+        </ul>
+    }
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $('#load').on('click', function () {
+                var taskId = $('#tsk').data('taskid');
+                $.ajax({
+                    url: "/Index/SubTasks/" + taskId,
+                    method: "GET",
+                    //data: { parentId: taskId },
+                    success: function (data) {
+                        //For each item retrieved in the AJAX call...
+                        //$.each(data, function (index, itemData) {
+                        //    //...append that item to the countriesList
+                        //    $("#countriesList").append("<option value='" + itemData + "'>" + itemData + "</option>");
+                        //});
+                        var x = data;
+                    }
+                });
+            });
+        });
+    </script>
+}
