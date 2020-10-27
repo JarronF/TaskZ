@@ -4,24 +4,32 @@
     ViewData["Title"] = "Home page";
 }
 
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Task Board</h1>
 </div>
 
 <div>
-    <h3>Task Board</h3>
-    <h5 class="alert alert-info">Using partial views:</h5>
+    <h3 class="alert alert-info">Using partial views:</h3>
     <p>Goal: Use an un-ordered list to display tasks using the _TaskListPartial view. </p>
     <p>Clicking the main task line will call a named handler method using AJAX and return the partial view to display the sub-tasks</p>
     <partial name="_TaskListPartial" model="Model.HighLevelTaskList" />
+
+
+    <h3 class="alert alert-info">Using MVCGrid:</h3>
+
+
 </div>
 @section scripts{
+
     <script>
+
         $(function () {
             $('.task-line').on('click', function () {
                 var taskId = $(this).data('taskid');
                 $(this).find("#subTasks").load("/Index/SubTasksPartial/" + taskId);
             });
         });
-    </script>
+    </script>   
+
 }
