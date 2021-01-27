@@ -5,18 +5,28 @@
 }
 
 
-<h2>Task Board</h2>
+<h2 class="alert alert-info">Task Board</h2>
 
 
 <div>
-    <h3 class="alert alert-info">Using partial views:</h3>
+    <h5>Using partial views:</h5>
     <p>Goal: Use an un-ordered list to display tasks using the _TaskListPartial view. </p>
     <p>Clicking the main task line will call a named handler method using AJAX and return the partial view to display the sub-tasks</p>
-    
-    <partial name="_TaskListPartial" model="Model.HighLevelTaskList" />
 
-
-    <h3 class="alert alert-info">Using MVCGrid:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Task Title</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <partial name="_TaskListPartial" model="Model.HighLevelTaskList" />           
+        </tbody>
+    </table>
+    <hr />
+    <h5>Using MVCGrid:</h5>
 
 
 </div>
@@ -27,7 +37,7 @@
         $(function () {
             $('.task-line').on('click', function () {
                 var taskId = $(this).data('taskid');
-                $(this).find("#subTasks").load("/Index/SubTasksPartial/" + taskId);
+                $(this).next("#subTasks").load("/Index/SubTasksPartial/" + taskId);
             });
         });
     </script>
