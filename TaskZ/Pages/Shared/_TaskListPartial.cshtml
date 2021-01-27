@@ -2,14 +2,15 @@
 
 @model List<TaskItem>
 
-<ul>
-    @foreach (TaskZ.Models.TaskItem task in Model)
-    {
-    <li class="task-line alert alert-primary" data-taskid="@task.Id">        
-        @task.Title
-        <div id="subTasks"></div>
-    </li>
-    }
-</ul>
+    <ul>
+        @foreach (TaskZ.Models.TaskItem task in Model)
+        {
+            <li class="task-line alert alert-primary" data-taskid="@task.Id">
+                @task.Title  <a asp-area="Tasks" asp-page="/Edit" asp-route-id="@task.Id">Edit</a> |
+                <a asp-page="./Index" onclick="return confirm('Are you sure you want to delete this item?');" asp-page-handler="Delete" asp-route-id="@task.Id">Delete</a>
+                <div id="subTasks"></div>
+            </li>
+        }
+    </ul>
 
 
