@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using TaskZ.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="nav nav-pills main-nav">
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Tasks" asp-page="/Create">Create Task</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="#">My Tasks</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-page="/Index">All Tasks</a>
+        </li>
+    </ul>
+}

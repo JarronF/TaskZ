@@ -5,14 +5,14 @@
 }
 
 
-<div class="text-center">
-    <h1 class="display-4">Task Board</h1>
-</div>
+<h2>Task Board</h2>
+
 
 <div>
     <h3 class="alert alert-info">Using partial views:</h3>
     <p>Goal: Use an un-ordered list to display tasks using the _TaskListPartial view. </p>
     <p>Clicking the main task line will call a named handler method using AJAX and return the partial view to display the sub-tasks</p>
+    
     <partial name="_TaskListPartial" model="Model.HighLevelTaskList" />
 
 
@@ -30,6 +30,6 @@
                 $(this).find("#subTasks").load("/Index/SubTasksPartial/" + taskId);
             });
         });
-    </script>   
+    </script>
 
 }

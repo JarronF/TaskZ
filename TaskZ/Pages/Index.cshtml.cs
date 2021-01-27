@@ -16,7 +16,7 @@ namespace TaskZ.Pages
     [AllowAnonymous]
     public class IndexModel : PageModel
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         private readonly ITaskItemService _taskItemService;
         public List<TaskItem> HighLevelTaskList { get; set; } = new List<TaskItem>();
         public List<TaskItem> SubTaskList { get; set; } = new List<TaskItem>();
@@ -26,16 +26,30 @@ namespace TaskZ.Pages
             _db = db;
             _logger = logger;
             _taskItemService = taskItemService;
-        }     
+        }
         public async Task OnGetAsync()
         {
-            HighLevelTaskList = await _taskItemService.GetHighLevelTasks();      
+            HighLevelTaskList = await _taskItemService.GetHighLevelTasks();
         }
 
         public async Task<PartialViewResult> OnGetSubTasksPartialAsync(int taskId)
         {
             SubTaskList = await _taskItemService.GetSubTasks(taskId);
             return Partial("_TaskListPartial", SubTaskList);
+        }
+
+        public ActionResult OnGetDelete(int? id)
+        {
+            if (id != null)
+            {
+                var data = (from tskItem in _db.TaskItem
+                            where tskItem.Id == id
+                            select tskItem).SingleOrDefault();
+
+                _db.Remove(data);
+                _db.SaveChanges();
+            }
+            return RedirectToPage("Index");
         }
     }
 }
