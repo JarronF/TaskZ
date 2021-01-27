@@ -41,8 +41,8 @@ namespace TaskZ.Areas.Tasks.Pages
         }
 
         public void OnGet()
-        {
-            PopulateUsersDropDownList(_context, User.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"));
+        {            
+            UsersDropDownList = Utilities.UserUtils.PopulateUsersDropDownList(_context, User.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"));
         }
 
         public void PopulateUsersDropDownList(ApplicationDbContext _context,
@@ -60,7 +60,7 @@ namespace TaskZ.Areas.Tasks.Pages
             {
                 return Page();
             }
-            
+
             var taskItem = new TaskItem
             {
                 Title = Input.Title,
