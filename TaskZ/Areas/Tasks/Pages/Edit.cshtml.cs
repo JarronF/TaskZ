@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using TaskZ.Models;
 using TaskZ.Data;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TaskZ.Areas.Tasks.Pages
 {
+    [AllowAnonymous]
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _db;
