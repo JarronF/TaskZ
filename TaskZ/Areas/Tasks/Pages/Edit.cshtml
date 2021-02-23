@@ -1,10 +1,11 @@
 ﻿@page "{id:int}"
+@using TaskZ.Models;
 @model TaskZ.Areas.Tasks.Pages.EditModel
 @{
 }
-<div>
+<div class="container">
     <h3>Edit a task</h3>
-    <form class="form-horizontal" method="post">
+    <form class="container form-horizontal" method="post">
         <div class="row form-group">
             <label asp-for="Input.Title" class="control-label col-1"></label>
             <input asp-for="Input.Title" type="text" class="form-control col-6" />
@@ -24,9 +25,26 @@
             </select>
         </div>
         <div class="row form-group">
-            <div class="control-label col-1"></div>
-            <button type="submit" class="btn btn-primary col-6">Save</button>
+            <label asp-for="Input.Comment" class="control-label col-1"></label>
+            <textarea asp-for="Input.Comment" class="form-control col-10" rows="6"></textarea>
+            <span asp-validation-for="Input.Comment" class="text-danger"></span>
         </div>
-    </form>
-
+        <div class="row form-group">
+            <div class="control-label col-1"></div>
+            <button type="submit" class="btn btn-primary col-1">Save</button>
+        </div>
+    </form>    
+    <h4>Previous comments</h4>
+    <ul class="container list-unstyled">
+        @foreach (TaskComment comment in Model.Comments)
+        {
+            <li>
+                <hr />
+                <div class="row form-group">
+                    <label class="control-label col-1">@comment.CommentDate</label>
+                    <label class="control-label col-10">@comment.Comment</label>
+                </div>
+            </li>
+        }
+    </ul>
 </div>

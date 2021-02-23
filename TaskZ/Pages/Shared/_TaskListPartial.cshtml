@@ -3,7 +3,7 @@
 @model List<TaskItem>
 
     <ul>
-        @foreach (TaskZ.Models.TaskItem task in Model)
+        @foreach (TaskItem task in Model)
         {
             <li class="task-line" data-taskid="@task.Id">
                 @task.Title  <a asp-area="Tasks" asp-page="/Edit" asp-route-id="@task.Id">Edit</a> |

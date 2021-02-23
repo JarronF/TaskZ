@@ -18,7 +18,7 @@ namespace TaskZ.Models
         public ApplicationUser AssignedUser { get; set; }
         public virtual TaskItem Parent { get; set; }
         public virtual ICollection<TaskItem> Children { get; set; }
-        //public int? TaskCommentId { get; set; }
-        //public virtual ICollection<TaskComment> Comments { get; set; }
+      // public int? TaskCommentId { get; set; }
+        public virtual ICollection<TaskComment> Comments { get; set; }
     }
 }

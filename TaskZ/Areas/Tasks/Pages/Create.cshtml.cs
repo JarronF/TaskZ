@@ -38,10 +38,11 @@ namespace TaskZ.Areas.Tasks.Pages
             public int TimeEstimated { get; set; }
             [Display(Name = "Assigned User")]
             public int SelectedUserID { get; set; }
+            public string Comment { get; set; }
         }
 
         public void OnGet()
-        {            
+        {
             UsersDropDownList = Utilities.UserUtils.PopulateUsersDropDownList(_context, User.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"));
         }
 
@@ -69,7 +70,22 @@ namespace TaskZ.Areas.Tasks.Pages
                 AssignedUserId = Input.SelectedUserID
             };
 
-            _context.Add(taskItem);
+            if (Input.Comment.Length > 0)
+            {
+                var taskComment = new TaskComment
+                {
+                    Parent = taskItem,
+                    Comment = Input.Comment,
+                    CommentDate = DateTime.Now,
+                    UserId = Input.SelectedUserID
+                };
+                _context.Add(taskComment);
+            }
+            else
+            {
+                _context.Add(taskItem);
+            }
+            
             _context.SaveChanges();
             return RedirectToPage("Areas/DashBoard");
         }

@@ -10,6 +10,7 @@ using TaskZ.Models;
 using TaskZ.Data;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace TaskZ.Areas.Tasks.Pages
 {
@@ -24,6 +25,7 @@ namespace TaskZ.Areas.Tasks.Pages
         public SelectList UsersDropDownList { get; set; }
         [BindProperty]
         public InputModel Input { get; set; }
+        public List<TaskComment> Comments { get; set; }
         public class InputModel
         {
             [Required]
@@ -36,6 +38,7 @@ namespace TaskZ.Areas.Tasks.Pages
             public int TimeEstimated { get; set; }
             [Display(Name = "Assigned User")]
             public int? SelectedUserID { get; set; }
+            public string Comment { get; set; }
         }
 
         public void OnGet(int? id)
@@ -43,17 +46,20 @@ namespace TaskZ.Areas.Tasks.Pages
             UsersDropDownList = Utilities.UserUtils.PopulateUsersDropDownList(_db, User.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"));
             if (id != null)
             {
-                var data = (from tskItem in _db.TaskItem
-                            where tskItem.Id == id
-                            select tskItem).SingleOrDefault();
+                var data = _db.TaskItem     
+                    .Include(c => c.Comments)
+                    .Where(t => t.Id == id)
+                    .SingleOrDefault();
 
                 Input = new InputModel
                 {
                     Title = data.Title,
                     DueDate = data.DueDate,
                     ShortDescription = data.ShortDescription,
-                    SelectedUserID = data.AssignedUserId
+                    SelectedUserID = data.AssignedUserId                    
                 };
+
+                Comments = new List<TaskComment>(data.Comments);
             }
         }
     }
