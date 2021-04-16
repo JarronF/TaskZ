@@ -8,8 +8,9 @@ namespace TaskZ.Services
 {
     public interface ITaskItemService
     {
-        Task<List<TaskItem>> GetHighLevelTasks();
-
-        Task<List<TaskItem>> GetSubTasks(int parentId);
+        public Task<List<TaskItem>> GetHighLevelTasks();
+        public Task<List<TaskItem>> GetSubTasks(int parentId);
+        public Task<TaskItem> GetTaskItemById(int taskId);
+        public int CreateTaskItem(TaskItem taskItem);
     }
 }

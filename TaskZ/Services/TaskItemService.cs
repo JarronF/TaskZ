@@ -5,32 +5,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using TaskZ.Data;
 using TaskZ.Models;
+using TaskZ.Repositories;
 
 namespace TaskZ.Services
 {
     public class TaskItemService : ITaskItemService
     {
-        private ApplicationDbContext _db;        
-        public TaskItemService(ApplicationDbContext db)
+        private readonly ITaskItemRepository _taskRepo;
+        public TaskItemService(ITaskItemRepository taskRepo)
         {
-            _db = db;
+            _taskRepo = taskRepo;
         }
-        public async Task<List<TaskItem>> GetHighLevelTasks()
+        public async Task<List<TaskItem>> GetHighLevelTasks() => await _taskRepo.GetTasksByParentId(null);
+        public async Task<List<TaskItem>> GetSubTasks(int parentId) => await _taskRepo.GetTasksByParentId(parentId);
+        public async Task<TaskItem> GetTaskItemById(int taskId) => await _taskRepo.GetTaskItemById(taskId);
+        public int CreateTaskItem(TaskItem taskItem)
         {
-            List<TaskItem> list = new List<TaskItem>();
-            list = await _db.TaskItem
-                .Where(tskItem => tskItem.ParentID == null).ToListAsync();
-                //.Include(tskItem => tskItem.Children).ToListAsync();
-
-            return list;
-        }
-        public async Task<List<TaskItem>> GetSubTasks(int parentId)
-        {
-            List<TaskItem> list = new List<TaskItem>();
-            list = await _db.TaskItem
-                .Where(tskItem => tskItem.ParentID == parentId).ToListAsync();
-//                .Include(tskItem => tskItem.Children).ToListAsync();
-            return list;
+            _taskRepo.CreateTaskItem(taskItem);
+            return _taskRepo.Save();
         }
     }
 }

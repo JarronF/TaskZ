@@ -15,6 +15,7 @@ using TaskZ.Data;
 using TaskZ.Models;
 using TaskZ.Utilities;
 using TaskZ.Services;
+using TaskZ.Repositories;
 
 namespace TaskZ
 {
@@ -32,6 +33,7 @@ namespace TaskZ
         {
             services.AddRazorPages();
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, TaskZUserClaimsPrincipalFactory>();
+            
 
             services.AddAuthorization(options =>
             {
@@ -41,7 +43,11 @@ namespace TaskZ
             });
 
             services.AddTransient<ITaskItemService, TaskItemService>();
-           
+            services.AddTransient<ITaskItemRepository, TaskItemRepository>();
+            services.AddTransient<ITaskCommentService, TaskCommentService>();
+            services.AddTransient<ITaskCommentRepository, TaskCommentRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
