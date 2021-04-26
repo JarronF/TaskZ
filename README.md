@@ -2,7 +2,7 @@
 Task scheduling and tracking project
 A task management application that allows one to enter various tasks for completion.
 
-Goals:
+### Goals:
 
 •	Utilize .NET Core and the ASP.NET RazorPages framework to build applications.
 
