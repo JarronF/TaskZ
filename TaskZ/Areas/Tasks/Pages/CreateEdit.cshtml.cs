@@ -18,7 +18,6 @@ namespace TaskZ.Areas.Tasks.Pages
 {
     public class CreateEditModel : PageModel
     {
-        //private readonly ApplicationDbContext _db;
         private readonly ITaskItemService _taskItemService;
         private readonly ITaskCommentService _commentService;
 
@@ -49,7 +48,11 @@ namespace TaskZ.Areas.Tasks.Pages
             public string Title { get; set; }
             [Display(Name = "Description")]
             public string ShortDescription { get; set; }
-            [Display(Name = "Due Date")]
+            [
+                Required,
+                DataType(DataType.Date),
+                Display(Name = "Due Date")
+            ]
             public DateTime DueDate { get; set; }
             public int TimeSpent { get; set; }
             public int TimeEstimated { get; set; }
@@ -59,7 +62,7 @@ namespace TaskZ.Areas.Tasks.Pages
         }
 
         public async Task OnGet(int? id)
-        {   
+        {
             UsersDropDownList = new SelectList(_userRepo.GetAllUsers(), "Id", "UserName", User.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"));
             TaskId = id;
 
