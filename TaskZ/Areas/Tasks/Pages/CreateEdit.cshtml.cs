@@ -47,6 +47,7 @@ namespace TaskZ.Areas.Tasks.Pages
             [Required]
             public string Title { get; set; }
             [Display(Name = "Description")]
+            [Required]
             public string ShortDescription { get; set; }
             [
                 Required,

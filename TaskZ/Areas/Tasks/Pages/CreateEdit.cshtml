@@ -8,20 +8,20 @@
     <h3>Create a new task to track</h3>
     <form class="container form-horizontal" method="post">
         <input type="hidden" asp-for="TaskId" />
+        <div asp-validation-summary="All" class="validation-summary-errors text-danger" data-valmsg-summary="true">          
+        </div>
         <div class="row form-group">
             <label asp-for="Input.Title" class="control-label col-1"></label>
-            <input asp-for="Input.Title" type="text" class="form-control col-6" />
-            <span asp-validation-for="Input.Title" class="text-danger"></span>
+            <input asp-for="Input.Title" type="text" class="form-control col-6" />            
 
             <label asp-for="Input.DueDate" class="control-label col-2"></label>
             <input asp-for="Input.DueDate" type="date" data-val="true" class="form-control col-2" />
-            <span asp-validation-for="Input.DueDate" class="text-danger"></span>
-        </div>     
-            
+
+        </div>
+
         <div class="row form-group">
             <label asp-for="Input.ShortDescription" class="control-label col-1"></label>
-            <textarea asp-for="Input.ShortDescription" class="form-control col-6" rows="4"></textarea>
-            <span asp-validation-for="Input.ShortDescription" class="text-danger"></span>
+            <textarea asp-for="Input.ShortDescription" class="form-control col-6" rows="4"></textarea>            
 
             <label asp-for="Input.SelectedUserID" class="control-label col-2"></label>
             <select asp-for="Input.SelectedUserID" class="form-control col-2" asp-items="@Model.UsersDropDownList">
