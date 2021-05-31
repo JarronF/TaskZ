@@ -1,5 +1,6 @@
 # TaskZ
-Task scheduling and tracking project
+Task scheduling and tracking project.
+
 A task management application that allows one to enter various tasks for completion.
 
 ### Goals:
