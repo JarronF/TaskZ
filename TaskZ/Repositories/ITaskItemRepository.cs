@@ -12,7 +12,7 @@ namespace TaskZ.Repositories
         public IEnumerable GetTaskItems();
         public Task<List<TaskItem>> GetTasksByParentId(int? parentId);
         public Task<TaskItem> GetTaskItemById(int taskId);
-        public void DeleteTaskItem(int taskId);
+        public Task<bool> DeleteTaskItem(int taskId);
         public void UpdateTaskItem(TaskItem taskItem);      
         public void CreateTaskItem(TaskItem taskItem);
         public int Save();

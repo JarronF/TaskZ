@@ -24,5 +24,7 @@ namespace TaskZ.Services
             _taskRepo.CreateTaskItem(taskItem);
             return _taskRepo.Save();
         }
+
+        public async Task<bool> DeleteTaskItem(int taskId) => await _taskRepo.DeleteTaskItem(taskId);
     }
 }

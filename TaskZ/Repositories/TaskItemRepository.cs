@@ -16,9 +16,15 @@ namespace TaskZ.Repositories
         {
             _db = db;
         }
-        public void DeleteTaskItem(int taskId)
+        public async Task<bool> DeleteTaskItem(int taskId)
         {
-            throw new NotImplementedException();
+            var data = (from tskItem in _db.TaskItem
+                        where tskItem.Id == taskId
+                        select tskItem).SingleOrDefault();
+
+            _db.Remove(data);
+            var saveCount = await _db.SaveChangesAsync();
+            return  saveCount > 0;
         }
 
         public async Task<TaskItem> GetTaskItemById(int TaskId)
@@ -59,5 +65,6 @@ namespace TaskZ.Repositories
             _db.Entry(taskItem).State = EntityState.Modified;
         }
 
+       
     }
 }
