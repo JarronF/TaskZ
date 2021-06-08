@@ -15,7 +15,7 @@ namespace TaskZ.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-        }
+        }        
         public DbSet<TaskItem> TaskItem { get; set; }
         public DbSet<TaskComment> TaskComment { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)

@@ -25,10 +25,11 @@ namespace TaskZ.Tests
 
             Assert.NotNull(actual);
             Assert.Equal(expected.Count, actual.Count);
-
+            
             for (int i = 0; i < expected.Count; i++)
             {
-                Assert.Equal(expected[i].Title, actual[i].Title);
+                Assert.Null(actual[i].ParentID);
+                Assert.Equal(expected[i].Title, actual[i].Title);                
             }
         }
         [Fact]
@@ -45,6 +46,7 @@ namespace TaskZ.Tests
 
             Assert.NotNull(actual);
             Assert.Equal(expected.Id, actual.Id);
+            Assert.Equal(expected.Title, actual.Title);
         }
 
         private async Task<TaskItem> GetSampleTaskItem()
