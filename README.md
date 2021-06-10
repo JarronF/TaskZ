@@ -7,6 +7,7 @@ A task management application that allows one to enter various tasks and subtask
 *	Code-First database migrations and the fluent API to create and configure the database and tables directly from code
 *	ASP.NET identity to manage logins and access
 *	Dependency Injection for Repositories and DbContext
+*	Unit Test project for testing via xUnit and MOQ
 
 ### Task Board:
 * Display list of tasks
