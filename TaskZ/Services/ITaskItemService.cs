@@ -11,7 +11,8 @@ namespace TaskZ.Services
         public Task<List<TaskItem>> GetHighLevelTasks();
         public Task<List<TaskItem>> GetSubTasks(int parentId);
         public Task<TaskItem> GetTaskItemById(int taskId);
-        public int CreateTaskItem(TaskItem taskItem);
+        public Task<int> CreateTaskItem(TaskItem taskItem);
         public Task<bool> DeleteTaskItem(int TaskId);
+        public Task UpdateTaskItem(TaskItem taskItem);
     }
 }

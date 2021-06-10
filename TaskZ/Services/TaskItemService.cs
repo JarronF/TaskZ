@@ -19,12 +19,14 @@ namespace TaskZ.Services
         public async Task<List<TaskItem>> GetHighLevelTasks() => await _taskRepo.GetTasksByParentId(null);
         public async Task<List<TaskItem>> GetSubTasks(int parentId) => await _taskRepo.GetTasksByParentId(parentId);
         public async Task<TaskItem> GetTaskItemById(int taskId) => await _taskRepo.GetTaskItemById(taskId);
-        public int CreateTaskItem(TaskItem taskItem)
+        public async Task<int> CreateTaskItem(TaskItem taskItem)
         {
-            _taskRepo.CreateTaskItem(taskItem);
-            return _taskRepo.Save();
+            await _taskRepo.CreateTaskItem(taskItem);
+            return await _taskRepo.SaveAsync();
         }
 
         public async Task<bool> DeleteTaskItem(int taskId) => await _taskRepo.DeleteTaskItem(taskId);
+
+        public async Task UpdateTaskItem(TaskItem taskItem) => await _taskRepo.UpdateTaskItem(taskItem);
     }
 }

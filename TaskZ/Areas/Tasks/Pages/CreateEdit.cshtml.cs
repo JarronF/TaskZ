@@ -81,7 +81,7 @@ namespace TaskZ.Areas.Tasks.Pages
             };
             Comments = new List<TaskComment>(data.Comments);
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace TaskZ.Areas.Tasks.Pages
             }
             if (PageMode == "Edit")
             {
-                UpdateTask(Input, (int)TaskId);
+                await UpdateTask(Input, (int)TaskId);
             }
             else
             {
@@ -99,15 +99,15 @@ namespace TaskZ.Areas.Tasks.Pages
                 }
                 else
                 {
-                    _taskItemService.CreateTaskItem(CreateTask(Input));
+                    await _taskItemService.CreateTaskItem(CreateTask(Input));
                 }
             }
             //_taskItemRepo.Save();
             return RedirectToPage("Pages");
         }
-        private void UpdateTask(InputModel input, int taskId)
+        private async Task UpdateTask(InputModel input, int taskId)
         {
-            //_taskItemRepo.UpdateTaskItem(CreateTask(input, taskId));
+            await _taskItemService.UpdateTaskItem(CreateTask(input, taskId));
         }
         private TaskComment CreateComment(InputModel input)
         {

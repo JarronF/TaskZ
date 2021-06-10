@@ -24,7 +24,7 @@ namespace TaskZ.Repositories
 
             _db.Remove(data);
             var saveCount = await _db.SaveChangesAsync();
-            return  saveCount > 0;
+            return saveCount > 0;
         }
 
         public async Task<TaskItem> GetTaskItemById(int TaskId)
@@ -50,21 +50,22 @@ namespace TaskZ.Repositories
             return list;
         }
 
-        public void CreateTaskItem(TaskItem taskItem)
+        public async Task CreateTaskItem(TaskItem taskItem)
         {
-            _db.Add(taskItem);
+            await _db.AddAsync(taskItem);
         }
 
-        public int Save()
+        public async Task<int> SaveAsync()
         {
-            return _db.SaveChanges();
+            return await _db.SaveChangesAsync();
         }
 
-        public void UpdateTaskItem(TaskItem taskItem)
+        public async Task UpdateTaskItem(TaskItem taskItem)
         {
             _db.Entry(taskItem).State = EntityState.Modified;
+            await SaveAsync();
         }
 
-       
+
     }
 }
