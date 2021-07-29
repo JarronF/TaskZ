@@ -1,6 +1,14 @@
 # TaskZ
 A task management application that allows one to enter various tasks and subtasks for completion. Also allows adding comments to tasks.
 
+I have moved this project over to version 2.0. While this was a good way to try out the below tech, I want to build something more modular, whereby the UI can be swapped out for other options (see roadmap below for changes I intend to make).
+
+#### Roadmap (v 2.0):
+* All non-UI code should be situated in class library
+* Use Web API to expose data.
+* Ability to add various stand alone UI frontend projects (MVC, RazorPages, Angular)
+* Use Dapper for data access (possibly use Entity Framework for Identity)
+
 #### Technology featured:
 *	C#, ASP.NET RazorPages 
 *	EntityFramework Core 
