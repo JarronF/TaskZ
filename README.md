@@ -6,7 +6,7 @@ Please see Version 2.0 at <https://github.com/JarronF/TaskZ_2.0>
 I have moved this project over to version 2.0. While this version was a good way to try out the below tech, I want to build something more modular, whereby the UI can be swapped out for other options (see roadmap below for changes I intend to make).
 
 #### Roadmap (v 2.0):
-* All non-UI code should be situated in class library
+* All non-UI code should be situated in a class library
 * Use Web API to expose data.
 * Ability to add various stand alone UI frontend projects (MVC, RazorPages, Angular)
 * Use Dapper for data access (possibly use Entity Framework for Identity)
